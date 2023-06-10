@@ -1,10 +1,10 @@
 import express from "express";
 
-import { UserModel } from "../../database/allModel"
+import { UserModel } from "../../database/user"
 
 const Router = express.Router();
 
-
+ 
 Router.post("/signup", async (req, res) => {
 
     try {

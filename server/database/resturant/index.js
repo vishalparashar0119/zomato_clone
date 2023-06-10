@@ -1,4 +1,4 @@
-import e from "e"
+import mongoose from "mongoose";
 
 const restauranSchema = new e.Schema({
   

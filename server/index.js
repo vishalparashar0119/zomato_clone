@@ -2,11 +2,8 @@
 import  express  from "express";
 import dotenv from "dotenv";
 // routes import
-
-
-
+import Auth from "./api/auth"
 // data base connection 
-
 import ConnectDB from './database/connection'
 
 dotenv.config()
@@ -31,9 +28,10 @@ zomato.listen(Port , ()=>{
        console.log("server is running but database connection failed");
        console.log(error);
    })
+
 });
 
-
+zomato.use("/auth",Auth);
 
 
 

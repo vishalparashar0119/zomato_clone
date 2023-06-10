@@ -6,8 +6,8 @@ import { error } from 'console';
 
 const userSchema = new mongoose.Schema({
     fullName: { type: String, required: true },
-    email: { type: string, requires: true },
-    password: string,
+    email: { type: String, requires: true },
+    password: String,
     address: [{ detail: { type: String }, for: { type: String } }],
     phoneNo: [{ type: Number }]
 
@@ -22,7 +22,7 @@ userSchema.method.generateJwtToken = function () {
     return jwt.sign({ user: this._id.toString() }, "zomatoApp")
 }
 
-userSchema.static.findByEmailAndPhoneNo = async ({ email, phoneNo }) => {
+userSchema.statics.findByEmailAndPhoneNo = async ({ email, phoneNo }) => {
 
     const checkUserByEmail = await UserModel.findOne({ email });
     const checkUserByPhoneNo = await UserModel.findOne({ phoneNo });
@@ -34,7 +34,7 @@ userSchema.static.findByEmailAndPhoneNo = async ({ email, phoneNo }) => {
     return false;
 };
 
-userSchema.static.findByEmailAndPassword = async ({ email, password }) => {
+userSchema.statics.findByEmailAndPassword = async ({ email, password }) => {
 
     const user = await UserModel.findOne({ email });
 
@@ -75,13 +75,13 @@ userSchema.pre("save", function (next) {
             return next(error);
         }
         // hashing 
-        bcrypt.hash(user.password, salt, (error, salt) => {
+        bcrypt.hash(user.password, salt, (error, hash) => {
 
             // if error
             if (error) {
                 return next(error);
             }
-
+           
             // hash the password
             user.password = hash;
         });
