@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
 // methods are the function which is connected to the schema so we can use this operator in it 
 // while static are sepearte function so we have to  pass parameter in it in the form of 
 // objects
-userSchema.method.generateJwtToken = function () {
+userSchema.methods.generateJwtToken = function () {
     return jwt.sign({ user: this._id.toString() }, "zomatoApp")
 }
 

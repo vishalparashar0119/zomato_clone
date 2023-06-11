@@ -11,9 +11,9 @@ Router.post("/signup", async (req, res) => {
 
         await UserModel.findByEmailAndPhoneNo(req.body.crediential);
         const newUser = await UserModel.create(req.body.crediential);
-        const token = await newUser.createJwtToken();
+        const token = await newUser.generateJwtToken();
 
-        return res.status(200).json(token , {status : "success"});
+        return res.status(200).json( {token ,status : "success"});
     } catch (error) {
           return res.status(500).json({error : error.message});
     }
@@ -21,6 +21,14 @@ Router.post("/signup", async (req, res) => {
 });
 
 Router.post("signin", async (req, res) => {
+    try{
+
+       const user =  await UserModel.findByEmailAndPassword(req.body.crediential);
+       const token = user.generateJwtToken();
+       return res.status(200).json({token , message:"success"});
+    }catch(error){
+        return res.status(500).json({error:error.message})
+    }
 
 });
 
