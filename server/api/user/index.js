@@ -12,12 +12,16 @@ const Router = express.Router();
 Router.get('/', async (req , res )=>{
 
     try {
-        const {email , fullName ,phoneNo , address} = req.params;
+        const {email , fullName ,phoneNo , address} = req.session.passport._doc;
+        return res.json({user : {email , fullName,phoneNo,address}});
     } catch (error) {
         return res.status(500).json({error : error.message});
     }
 
      
 })
+
+
+
 
 export default Router;

@@ -5,9 +5,9 @@ const FoodSchema = new mongoose.Schema({
     name: { type: String, required: true },
     descript: { type: String, required: true },
     isVeg: { type: Boolean, required: true },
-    isContainsEgg : { type: String, required: true },
+    isContainsEgg : { type: Boolean, required: true },
     catagory: { type: String, required: true },
-    photos: { type : mongoose.Types.ObjectId ,  ref:"images" },
+    photos: [{ type : mongoose.Types.ObjectId ,  ref:"images" }],
     price: { type: Number , default: 150 ,required: true },
     addOns: [
         {

@@ -1,6 +1,6 @@
 import express, { response }  from "express";
 
-import {FoodModel, UserModel} from "../../database/allModel"
+import {FoodModel} from "../../database/allModel"
 
 const Router = express.Router();
 
@@ -30,7 +30,7 @@ Router.get("/:_id" , async (req , res)=>{
 //  Access : public
 //  Method : get
 
-Router.get('/rest/:_id' , async (res , req ) => {
+Router.get('/rest/:_id' , async (req , res ) => {
     try {
          const {_id} = req.params;
          const foods = await FoodModel.find({
@@ -60,7 +60,7 @@ Router.get('/rest/:_id' , async (res , req ) => {
 //  Method : get
 // home work
 
-Router.get('/cat/:category',async (res , req)=>{
+Router.get('/cat/:category',async (req , res)=>{
     try {
            const {category} = req.params;
            const foods = await FoodModel.find({ 
@@ -75,7 +75,7 @@ Router.get('/cat/:category',async (res , req)=>{
         return res.json({foods})
 
     } catch (error) {
-        return response.status(500).json({error: error.message});
+        return res.status(500).json({error: error.message});
     }
 });
 

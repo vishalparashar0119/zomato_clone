@@ -1,5 +1,5 @@
 
-import express from 'express'
+import express from "express"
 
 import {RestaurantModel} from "../../database/allModel"
 
