@@ -8,9 +8,9 @@ const Router = express.Router();
 Router.post("/signup", async (req, res) => {
 
     try {
-
-        await UserModel.findByEmailAndPhoneNo(req.body.crediential);
-        const newUser = await UserModel.create(req.body.crediential);
+        
+        await UserModel.findByEmailAndPhoneNo(req.body.credential);
+        const newUser = await UserModel.create(req.body.credential);
         const token = await newUser.generateJwtToken();
 
         return res.status(200).json( {token ,status : "success"});
@@ -20,10 +20,10 @@ Router.post("/signup", async (req, res) => {
 
 });
 
-Router.post("signin", async (req, res) => {
+Router.post("/signin", async (req, res) => {
     try{
 
-       const user =  await UserModel.findByEmailAndPassword(req.body.crediential);
+       const user =  await UserModel.findByEmailAndPassword(req.body.credential);
        const token = user.generateJwtToken();
        return res.status(200).json({token , message:"success"});
     }catch(error){

@@ -30,7 +30,8 @@ zomato.get("/",(req , res)=>{
 });
 zomato.use("/auth",Auth);
 zomato.use("/food",Food);
-zomato.use("/reataurant",Rest)
+zomato.use("/reataurant",Rest);
+zomato.use("/user",User);
 
 const Port = 4000;
 

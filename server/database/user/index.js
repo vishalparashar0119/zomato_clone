@@ -6,8 +6,8 @@ import { error } from 'console';
 
 const userSchema = new mongoose.Schema({
     fullName: { type: String, required: true },
-    email: { type: String, requires: true },
-    password: String,
+    email: { type: String, required: true },
+    password:{ type : String},
     address: [{ detail: { type: String }, for: { type: String } }],
     phoneNo: [{ type: Number }]
 
@@ -22,7 +22,7 @@ userSchema.methods.generateJwtToken = function () {
     return jwt.sign({ user: this._id.toString() }, "zomatoApp")
 }
 
-userSchema.statics.findByEmailAndPhoneNo = async ({ email, phoneNo }) => {
+userSchema.statics.findByEmailAndPhoneNo = async ({ email , phoneNo }) => {
 
     const checkUserByEmail = await UserModel.findOne({ email });
     const checkUserByPhoneNo = await UserModel.findOne({ phoneNo });
@@ -47,7 +47,7 @@ userSchema.statics.findByEmailAndPassword = async ({ email, password }) => {
     const doesHavePassword = await bcrypt.compare(password, user.password);
 
     if (!doesHavePassword) {
-        throw new error("invalid credentials !!!");
+        throw new error("invalid credential !!!");
     }
 
     return user;
