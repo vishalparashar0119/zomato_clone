@@ -1,7 +1,7 @@
 import JwtPassport from "passport-jwt";
 import { UserModel } from "../database/user";
 
-
+const jwtSecret = process.env.JWT_SECRET;
 // first make jwt strtategy which is use to validate token
 const JwtStrategy =  JwtPassport.Strategy;
 
@@ -12,7 +12,7 @@ const ExtractJwt = JwtPassport.ExtractJwt;
 
 const options = {
    jwtFromRequest : ExtractJwt.fromAuthHeaderAsBearerToken(),
-   secretOrKey    : "zomatoApp"
+   secretOrKey    : `${jwtSecret}`
 };
 
 export default (passport) => {
